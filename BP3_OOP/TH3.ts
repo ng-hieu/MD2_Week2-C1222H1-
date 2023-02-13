@@ -33,8 +33,8 @@ class Circle {
 
 let circle: Circle = new Circle("red", false, 6);
 console.log(circle);
-console.log(circle.getArea);
-console.log(circle.getPerimeter);
+console.log(circle.getArea());
+console.log(circle.getPerimeter());
 
 class Rectangle {
     color: string;
