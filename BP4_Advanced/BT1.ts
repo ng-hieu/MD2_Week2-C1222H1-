@@ -1,36 +1,41 @@
-class User{
-    protected name:string;
-    protected email:string;
-    public role:number;
+class User {
+    private _name: string;
+    private _email: string;
+    private _role: number;
 
     constructor(name: string, email: string, role: number) {
-        this.name = name;
-        this.email = email;
-        this.role = role;
+        this._name = name;
+        this._email = email;
+        this._role = role;
     }
-    isAdmin(user:User){
-        switch (user.role){
+
+    isAdmin(user: User) {
+        switch (user._role) {
             case 1:
-                console.log(`${user.name} là Admin`);
+                console.log(`${user._name} là Admin`);
                 break;
             case 2:
-                console.log(`${user.name} là User`);
+                console.log(`${user._name} là User`);
                 break;
         }
     }
-    get getInfo(){
-       return `${this.name}
-       ${this.email}
-       ${this.role}`
+
+    get getInfo() {
+        return `     Name: ${this._name}
+       Email: ${this._email}
+       Role: ${this._role}`
     }
-    set infoName(name:string){
-        this.name = name;
+
+    set name(value: string) {
+        this._name = value;
     }
-    set infoEmail(email:string){
-        this.email = email;
+
+    set email(value: string) {
+        this._email = value;
     }
-    set infoRole(role:number){
-        this.role = role;
+
+    set role(value: number) {
+        this._role = value;
     }
 }
 
@@ -40,3 +45,6 @@ console.log(person2.getInfo);
 console.log(person.getInfo);
 person.isAdmin(person);
 person.isAdmin(person2);
+person.name = "duy";
+console.log(person.getInfo)
+
