@@ -86,10 +86,10 @@ class Rectangle extends Shape{
         this._length = value;
     }
     getArea():number{
-        return (this._width+this._length)*2;
+        return this._width*this._length;
     }
     getPerimeter():number{
-        return this._width*this._length;
+        return (this._width+this._length)*2;
     }
     toString(): string {
         return `A Rectangle with width=${this._width} and length=${this._length}, which is a subclass of ${super.toString()}`;
