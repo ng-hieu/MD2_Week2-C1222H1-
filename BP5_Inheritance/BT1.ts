@@ -46,8 +46,7 @@ class Cylinder extends Circle {
     }
 
     getVolume():number{
-        let Pi = 3.14;
-        return this._height*Math.pow(this.radius, 2)*Pi;
+        return super.getArea()*this._height
     }
 }
 let cylinder = new Cylinder(7.1, "red", 5);
