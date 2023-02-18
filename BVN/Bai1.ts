@@ -58,7 +58,7 @@ class Workers extends Persons {
         if (this.level < 1 || this.level > 10) {
             console.log("EROR!!! Chi nhap cap do trong khoang tu 1 den 10")
         } else {
-            console.log(`Cong nhan co cap do ${this.level}`)
+            console.log(this.level)
         }
     }
 }
@@ -89,7 +89,7 @@ class Staff extends Persons {
     }
 }
 
-class ManegerPerson {
+class PersonManager {
     persons: Persons[] = [];
 
     constructor() {
@@ -100,36 +100,143 @@ class ManegerPerson {
     }
 
     findName(name: string) {
-        let i = -1;
         this.persons.forEach(function (value, index, array) {
             if (value.name === name) {
-                i = index;
+                console.table(array[index])
             }
         })
-        return i;
     }
 
-    showName(name: string) {
-        let indexPerson = this.findName(name)
-        if (indexPerson != -1) {
-            console.log(this.persons[indexPerson]);
-        }
-    }
 
-    showALl():Persons[]{
-       return this.persons
+    showALl(): Persons[] {
+        return this.persons
     }
 }
 
-let check1 = new Workers("Duy", 12, "Man", "Hanoi", 10);
-let check1_2 = new Workers("Huy", 132, "Worman", "Hanoi", 10);
+let input = require('readline-sync');
+let personManager = new PersonManager()
 
-let check2 = new Engineers("Duy", 2312, "Man", "Hanoi", "ajsdfhjhosadjfip");
-let check3 = new Staff("Phong", 1232, "Worman", "HaiPhong", "In");
-let maneger = new ManegerPerson()
-maneger.add(check3)
-maneger.add(check2)
-maneger.add(check1)
-maneger.add(check1_2)
-maneger.showName("Duy")
-//console.table(maneger.showALl())
+function showMainMenu() {
+    let choice = -1
+    do {
+        console.log(`
+        ----Main Menu---
+        1.Them moi
+        2.Hien thi
+        3.Tim
+        0.Thoat
+        `
+        )
+        choice = +input.question('Enter Choice: ');
+        switch (choice) {
+            case 1:
+                checkJob();
+                break;
+            case 2:
+                showAll();
+                break;
+            case 3:
+                findName();
+                break;
+        }
+    }
+    while (choice !== 0);
+}
+
+showMainMenu()
+
+function checkJob() {
+    let choice = -1;
+    do {
+        console.log(`
+        ----Them nhan vien vao cong viec nao?---
+        1.Cong nhan
+        2.Ky sư
+        3.Nhan vien
+        0.Thoat
+        `
+        )
+        choice = +input.question('Enter Choice: ');
+        switch (choice) {
+            case 1:
+                addWorker();
+                break;
+            case 2:
+                addEngineers();
+                break;
+            case 3:
+                addStaff();
+                break;
+        }
+    } while (choice != 0)
+}
+
+function addWorker() {
+    console.log(`----Menu Them moi cong nhan----`);
+    let fullName = input.question('Enter full name: ');
+    let age = +input.question('Enter age: ');
+    let sex = input.question('Enter sex: ');
+    let address = input.question('Enter address: ')
+    let level = +input.question('Enter level: ')
+    let workers: Workers = new Workers(fullName, age, sex, address, level)
+    personManager.add(workers);
+    //workers.levelOfWorkers()
+    console.log('Them thanh cong')
+}
+function addEngineers(){
+    console.log(`----Menu Them moi ky su----`);
+    let fullName = input.question('Enter full name: ');
+    let age = +input.question('Enter age: ');
+    let sex = input.question('Enter sex: ');
+    let address = input.question('Enter address: ')
+    let specialized = input.question('Enter specialized: ')
+    let engineers: Engineers = new Engineers(fullName, age, sex, address, specialized)
+    personManager.add(engineers);
+    console.log('Them thanh cong')
+}
+function addStaff(){
+    console.log(`----Menu Them moi nhan vien----`);
+    let fullName = input.question('Enter full name: ');
+    let age = +input.question('Enter age: ');
+    let sex = input.question('Enter sex: ');
+    let address = input.question('Enter address: ')
+    let task = input.question('Enter task: ')
+    let staff: Staff = new Staff(fullName, age, sex, address, task)
+    personManager.add(staff);
+    console.log('Them thanh cong')
+}
+
+// function addPerson(){
+//     console.log(`----Menu Them moi----`)
+//     let fullName = input.question('Enter full name: ');
+//     let age = +input.question('Enter age: ');
+//     let sex = input.question('Enter sex: ');
+//     let address = input.question('Enter address: ')
+//     let level = +input.question('Enter level: ')
+//     let person:Workers = new Workers(fullName, age, sex, address, level)
+//     personManager.add(person);
+//     console.log('Them thanh cong')
+// }
+function showAll() {
+    console.table(personManager.showALl())
+}
+
+function findName() {
+    console.log(`----Menu Tim ten----`)
+    let fullName = input.question('Enter name: ');
+    personManager.findName(fullName)
+}
+
+
+// let check1 = new Workers("Duy", 12, "Man", "Hanoi", 10);
+// let check1_2 = new Workers("Huy", 132, "Worman", "Hanoi", 10);
+//
+// let check2 = new Engineers("Duy", 2312, "Man", "Hanoi", "ajsdfhjhosadjfip");
+// let check3 = new Staff("Phong", 1232, "Worman", "HaiPhong", "In");
+
+// maneger.add(check3)
+// maneger.add(check2)
+// maneger.add(check1)
+// maneger.add(check1_2)
+// maneger.findName("Duy")
+// //console.table(maneger.showALl())
